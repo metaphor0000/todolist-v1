@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-var item = "";
+var items = [];
 
 app.set('view engine','ejs');
 
@@ -17,11 +17,12 @@ app.get("/",function(req,res){
 
     var day = today.toLocaleDateString("en-US",options);
 
-    res.render("list",{kindOfDay: day,newListItem: item});
+    res.render("list",{kindOfDay: day,newListItem: items});
 });
 
 app.post("/",function(req,res){
-    item = req.body.newItem;
+    var item = req.body.newItem;
+    items.push(item);
     res.redirect("/");
 })
 
