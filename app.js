@@ -6,17 +6,16 @@ app.set('view engine','ejs');
 
 app.get("/",function(req,res){
     var today = new Date();
-    var currentDate = parseInt(today.getDate());
-    var day = "";
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var options = {
+        weekday : "long",
+        day : "numeric",
+        month : "long"
+    };
+
+    var day = today.toLocaleDateString("en-US",options);
 
 
-    const d = new Date();
-    day = weekday[d.getDay()];
-
-
-    res.render("list",{kindOfDay: day})
-    res.send("<h1>InShaAllah I Will Shine,<br>Game is not over until I Win</h1>");
+    res.render("list",{kindOfDay: day});
 });
 
 app.listen(3000,function(){
